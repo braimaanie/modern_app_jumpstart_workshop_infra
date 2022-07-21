@@ -44,3 +44,15 @@ spec:
         proxy:
           upstream: api
           rewritePath: /images
+    - path: /api/recommendations
+      splits:
+        - weight: 90
+          action:
+            proxy:
+              upstream: recommendations
+              rewritePath: /api/recommendations
+        - weight: 10
+          action:
+            proxy:
+              upstream: recommendations-v2
+              rewritePath: /api/recommendations
