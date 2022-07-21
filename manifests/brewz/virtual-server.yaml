@@ -19,6 +19,9 @@ spec:
         interval: 20s
         jitter: 3s
         port: 8000
+    - name: recommendations-v2
+      service: recommendations-v2
+      port: 8001
   routes:
     - path: /
       action:
