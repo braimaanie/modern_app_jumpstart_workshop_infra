@@ -1,4 +1,3 @@
----
 apiVersion: k8s.nginx.org/v1
 kind: VirtualServer
 metadata:
@@ -25,6 +24,16 @@ spec:
     - path: /api
       action:
         pass: api
+      errorPages:
+        - codes: [404]
+          return:
+            code: 404
+            type: application/json
+            body: |
+              {\"msg\": \"Could not find the product!\"}
+            headers:
+            - name: x-debug-original-status
+              value: ${upstream_status}
     - path: /images
       action:
         proxy:
